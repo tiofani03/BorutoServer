@@ -53,9 +53,9 @@ class ApplicationTest {
                 val expected = ApiResponse(
                     success = true,
                     message = "OK",
-                    previousPage = calculatePage(page = page)["prevPage"],
+                    prevPage = calculatePage(page = page)["prevPage"],
                     nextPage = calculatePage(page = page)["nextPage"],
-                    data = heroes[page - 1],
+                    heroes = heroes[page - 1],
                 )
                 assertEquals(
                     expected = expected,
@@ -106,7 +106,7 @@ class ApplicationTest {
             val response = client.get("/boruto/heroes/search?name=sas")
             assertEquals(expected = HttpStatusCode.OK, actual = response.status)
             val actual = Json.decodeFromString<ApiResponse>(response.bodyAsText())
-                .data.size
+                .heroes.size
             assertEquals(expected = 1, actual = actual)
         }
 
@@ -117,7 +117,7 @@ class ApplicationTest {
             val response = client.get("/boruto/heroes/search?name=sa")
             assertEquals(expected = HttpStatusCode.OK, actual = response.status)
             val actual = Json.decodeFromString<ApiResponse>(response.bodyAsText())
-                .data.size
+                .heroes.size
             assertEquals(expected = 3, actual = actual)
         }
 
@@ -128,7 +128,7 @@ class ApplicationTest {
             val response = client.get("/boruto/heroes/search?name=")
             assertEquals(expected = HttpStatusCode.OK, actual = response.status)
             val actual = Json.decodeFromString<ApiResponse>(response.bodyAsText())
-                .data
+                .heroes
             assertEquals(expected = emptyList(), actual = actual)
         }
 
@@ -139,7 +139,7 @@ class ApplicationTest {
             val response = client.get("/boruto/heroes/search?name=unknown")
             assertEquals(expected = HttpStatusCode.OK, actual = response.status)
             val actual = Json.decodeFromString<ApiResponse>(response.bodyAsText())
-                .data
+                .heroes
             assertEquals(expected = emptyList(), actual = actual)
         }
 

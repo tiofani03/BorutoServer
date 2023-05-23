@@ -404,9 +404,9 @@ class HeroRepositoryImpl : HeroRepository {
         return ApiResponse(
             success = true,
             message = "OK",
-            previousPage = calculatePage(page)[PREV_PAGE_KEY],
+            prevPage = calculatePage(page)[PREV_PAGE_KEY],
             nextPage = calculatePage(page)[NEXT_PAGE_KEY],
-            data = heroes[page]!!
+            heroes = heroes[page]!!
         )
     }
 
@@ -421,7 +421,7 @@ class HeroRepositoryImpl : HeroRepository {
         return ApiResponse(
             success = true,
             message = "OK",
-            data = findHeroes(name)
+            heroes = findHeroes(name)
         )
     }
 
