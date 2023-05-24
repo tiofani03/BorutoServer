@@ -56,6 +56,7 @@ class ApplicationTest {
                     prevPage = calculatePage(page = page)["prevPage"],
                     nextPage = calculatePage(page = page)["nextPage"],
                     heroes = heroes[page - 1],
+                    lastUpdated = System.currentTimeMillis(),
                 )
                 assertEquals(
                     expected = expected,
